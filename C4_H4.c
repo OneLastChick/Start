@@ -7,10 +7,8 @@ int main()
     double a,b,c;
     printf("Please a,b,c:\n");
     scanf("%lf%lf%lf",&a,&b,&c);
-
     double s = CALC_S(a,b,c);
     double area = CALC_AREA(a,b,c);
-    
     printf("The tangle area is %lf\n",area);
     return 0;
 
