@@ -25,6 +25,8 @@ void InsertSort(int a[],int n)
             a[j+1]=a[j];
         }
         a[j+1]=temp;
+        output(a,n);
+        printf("\n");
     }
 }
 
