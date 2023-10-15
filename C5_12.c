@@ -7,21 +7,16 @@ void strncate(char t[],char s[],int n)
     {
         i++;   //第一步  扫描串t  下标i定位到串t的结尾'\0' 
     }
-    while(n--&&(t[i]=s[j])!='\0')
+    while(n--&&(t[i++]=s[j++])!='\0')
     {
-        if(t[i])
-        {
-            t[i+1]='\0';
-        }
-        i++;
-        j++;
-
+        t[i]='\0';
     }
+        
 }
 int main()
 {
     char str1[50]="Hello",str2[]="World!";
-    strncate(str1,str2,3);
+    strncate(str1,str2,8);
     puts(str1);
     return 0;
 }
