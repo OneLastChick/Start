@@ -11,16 +11,16 @@ long atol(const char s[]) {
     errno = 0; // 重置 errno 以表示成功
     i = 0;
 
-    while (isspace(s[i])) i++;
-    if (s[i] == '-' || s[i] == '+') {
-        if (s[i] == '-') sign = 1;
+    while (isspace(s[i])) i++;    //跳过前导符号
+    if (s[i] == '-' || s[i] == '+') {    // 处理正负号
+        if (s[i] == '-') sign = 1;   //sign=0代表整数 sign=1代表负数
         i++;
     }
 
     for (result = 0; isdigit(s[i]); i++) {
         last = result;
         result = 10 * result + (s[i] - '0');
-        if (result / 10 != last) {
+        if (result / 10 != last) {            //检查溢出
             errno = ERANGE;
             return (sign == 1) ? LONG_MIN : LONG_MAX;
         }
