@@ -21,3 +21,13 @@ int main()
     }
     return 0;
 }
+// #include <stdio.h>
+// int main()
+// {
+//     char c;
+//     while((c=getchar())!=EOF)
+//     {
+//         if()
+//     }
+//     return 0;
+// }
