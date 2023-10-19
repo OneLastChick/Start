@@ -21,7 +21,7 @@ void printPascalTriangle(int n) {
         // 打印当前行的数值
         for (int j = 0; j <= i; j++) {
             int coef = calculateBinomialCoefficient(i, j);
-            printf("%6d", coef);
+            printf("%4d", coef);
         }
 
         printf("\n");
