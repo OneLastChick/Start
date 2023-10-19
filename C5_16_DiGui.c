@@ -33,7 +33,7 @@ void jumphorse(int i)
     else
     for(j=0;j<4;j++)
     {
-        if(inchess(pos[i][0]+dx[j],pos[i][1]+dy[j]));
+        if(inchess(pos[i][0]+dx[j],pos[i][1]+dy[j]))
         jumphorse(i+1);
     }
 }
