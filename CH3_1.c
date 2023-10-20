@@ -1,4 +1,4 @@
-// #include <stdio.h>
+#include <stdio.h>
 // int main()
 // {
 //     char c;
@@ -48,7 +48,6 @@
 //         }
 //     return 0;
 // }
-#include <stdio.h>
 
 // int main() {
 //     char c;
@@ -77,7 +76,7 @@ int main()
         } else if (c >= 'A' && c <= 'F') {
             printf("%d", c - 'A' + 10);
         } else {
-            printf("%d(%c)",c,c); 
+            printf("%c",c); 
         }
     return 0;
 }
