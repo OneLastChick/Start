@@ -71,62 +71,62 @@
 //     return 0;
 
 // }
-// //--------非递归
-// #include <stdio.h>
+//--------非递归
+#include <stdio.h>
 
-// void ScanTDA(int m, int n, int TDA[m][n]) {
-//     int c = 0;
-//     int a = m - 1;
-//     int d = 0;
-//     int b = n - 1;
+void ScanTDA(int m, int n, int TDA[m][n]) {
+    int c = 0;
+    int a = m - 1;
+    int d = 0;
+    int b = n - 1;
 
-//     while (c <= a && d <= b) {
-//         // 从左到右
-//         for (int i = d; i <= b; i++) {
-//             printf("%d ", TDA[c][i]);
-//         }
-//         c++;
+    while (c <= a && d <= b) {
+        // 从左到右
+        for (int i = d; i <= b; i++) {
+            printf("%d ", TDA[c][i]);
+        }
+        c++;
 
-//         // 从上到下
-//         for (int i = c; i <= a; i++) {
-//             printf("%d ", TDA[i][b]);
-//         }
-//         b--;
+        // 从上到下
+        for (int i = c; i <= a; i++) {
+            printf("%d ", TDA[i][b]);
+        }
+        b--;
 
-//         // 从右到左
-//         if (c <= a) {
-//             for (int i = b; i >= d; i--) {
-//                 printf("%d ", TDA[a][i]);
-//             }
-//             a--;
-//         }
+        // 从右到左
+        if (c <= a) {
+            for (int i = b; i >= d; i--) {
+                printf("%d ", TDA[a][i]);
+            }
+            a--;
+        }
 
-//         // 从下到上
-//         if (d <= b) {
-//             for (int i = a; i >= c; i--) {
-//                 printf("%d ", TDA[i][d]);
-//             }
-//             d++;
-//         }
-//     }
-// }
+        // 从下到上
+        if (d <= b) {
+            for (int i = a; i >= c; i--) {
+                printf("%d ", TDA[i][d]);
+            }
+            d++;
+        }
+    }
+}
 
-// int main() {
-//     int m, n;
-//     scanf("%d", &m);
-//     n=4;
+int main() {
+    int m, n;
+    scanf("%d", &m);
+    n=4;
 
-//     int TDA[m][n];
-//     for (int i = 0; i < m; i++) {
-//         for (int j = 0; j < n; j++) {
-//             scanf("%d", &TDA[i][j]);
-//         }
-//     }
+    int TDA[m][n];
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &TDA[i][j]);
+        }
+    }
 
-//     ScanTDA(m, n, TDA);
+    ScanTDA(m, n, TDA);
 
-//     return 0;
-// }
+    return 0;
+}
 #include <stdio.h>
 // void ScanJZ(int JZ[][4],int lie,int hang,int m,int n,int left,int right,int top,int bottom)
 // {
@@ -183,23 +183,23 @@
 //     ScanJZ(JZ,lie,hang,0,0,left,right,top,bottom);
 //     return 0;
 // }
-int main()
-{
-    int lie = 4;  // 定义 lie 变量并赋值
-    int hang = 0;
-    scanf("%d", &hang);
-    int JZ[hang][lie];
-    for (int i = 0; i < hang; i++)
-    {
-        for (int j = 0; j < lie; j++)
-        {
-            scanf("%d", &JZ[i][j]);
-        }
-    }
-    int left = 0;
-    int right = lie - 1;  // 修正 right 变量
-    int top = 0;
-    int bottom = hang - 1;
-    ScanJZ(JZ, lie, hang, 0, 0, left, right, top, bottom);
-    return 0;
-}
+// int main()
+// {
+//     int lie = 4;  // 定义 lie 变量并赋值
+//     int hang = 0;
+//     scanf("%d", &hang);
+//     int JZ[hang][lie];
+//     for (int i = 0; i < hang; i++)
+//     {
+//         for (int j = 0; j < lie; j++)
+//         {
+//             scanf("%d", &JZ[i][j]);
+//         }
+//     }
+//     int left = 0;
+//     int right = lie - 1;  // 修正 right 变量
+//     int top = 0;
+//     int bottom = hang - 1;
+//     ScanJZ(JZ, lie, hang, 0, 0, left, right, top, bottom);
+//     return 0;
+// }

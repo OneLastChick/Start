@@ -1,14 +1,16 @@
-def encode_bytes(num):
-    s = "" # 创建一个空字符串
-    for i in range(0, len(num), 3): # 从0开始，每隔3步遍历num的索引
-        numa = num[i] # 获取num[i]的值，赋值给numa
-        numb = num[i+1] # 获取num[i+1]的值，赋值给numb
-        numc = num[i+2] # 获取num[i+2]的值，赋值给numc
-        num1 = (numa << 3) | (numb >> 3) # 将numa左移3位，与numb右移3位按位或，赋值给num1
-        num2 = ((numb & 7) << 4) | numc # 将numb与7按位与，左移4位，与numc按位或，赋值给num2
-        s += chr(num1) + chr(num2) # 将num1和num2转换成字符，追加到s中
-    return s # 返回s
-
-input_num = [13, 35, 3, 13, 7, 3, 12, 46, 3, 15, 30, 1, 6, 19, 9, 6, 62, 6, 7, 3, 6, 12, 34, 13, 12, 51, 1, 12, 11, 6, 5, 43, 4, 12, 11, 3, 6, 50, 13, 7, 14, 6, 6, 6, 6, 5, 43, 3, 6, 43, 8, 6, 59, 3, 12, 35, 3, 12, 11, 1, 6, 46, 6, 6, 15, 13]
-result = encode_bytes(input_num)
-print(result)
+ def get_message():
+#     url = 'http://202.38.93.111:10021/api/getMessages'
+#     headers = {
+#         'Content-Type':'application/json',
+#         'Cookie': '_ga_R1FN4KJKJH=GS1.1.1698551519.1.1.1698551534.0.0.0; _ga=GA1.1.71891944.1698551519; session=eyJ0b2tlbiI6IjE2OTE6TUVVQ0lRRHltTjVPc2RhTElMTWd2RFFpM0ZWY200d1o2cXRLMzRwdmx5NGt3dTBaS3dJZ0ZsUFZZcnRsdjZIZDZ2Smd1UWUxM2daTHhoaDhDZWl6VXpsME83UUFCdFk9In0.ZUJf1Q.FQ7DjlYMdYh0YnYkV5gUFkjDwlY'
+#     }
+#     response = requests.post(url,headers=headers)
+#     print(response.content)
+#     text = json.loads(response.content)
+#     for i,message in enumerate(text["messages"]):
+#         if "flag" in message["text"]:
+#             flag=0
+#             while(flag==False):
+#                 print(i)
+#                 time.sleep(0.5)
+#                 flag=delete_message(i)
