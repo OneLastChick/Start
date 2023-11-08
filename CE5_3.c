@@ -47,6 +47,7 @@
 //     putQueen(0);   //从第0行开始摆放
 //     return 0;
 // }
+//N皇后问题
 #include <stdio.h>
 
 int queen[11];       // 用于记录每行皇后所在的列号
@@ -56,22 +57,12 @@ int slash2[20];      // 用于记录135度对角线上的冲突情况
 int count = 0;       // 用于计数满足条件的解的数量
 int n = 0;           // 棋盘的大小，即皇后的数量
 
-void output()
-{
-    printf("\nWay %2d:", count);
-    for (int i = 0; i < n; i++)
-    {
-        printf("%2d", queen[i]);
-    }
-}
-
 void putQueen(int row)
 {
     int col;
     if (row == n)  // 所有皇后都已放置完成
     {
         count++;
-        output();
         return;
     }
     for (col = 0; col < n; col++)
@@ -100,5 +91,13 @@ int main()
         slash1[i] = slash2[i] = 1;  // 初始化对角线冲突标记，表示没有冲突
     }
     putQueen(0);  // 从第0行开始放置皇后
+    if(count==0)
+    {
+        printf("无解\n");
+    }
+    else
+    {
+        printf("%d\n",count);
+    }
     return 0;
 }

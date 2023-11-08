@@ -1,6 +1,8 @@
 {
     "C_Cpp.errorSquiggles": "enabled",
     "files.associations": {
-        "2.C": "cpp"
+        "*.embeddedhtml": "html",
+        "2.C": "cpp",
+        "stdio.h": "c"
     }
 }
