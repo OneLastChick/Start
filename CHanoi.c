@@ -1,169 +1,35 @@
-/*------------------------------------
-project ： 汉诺塔演示软件； 
-language：     C语言
-author：   404name
-叠64层需要开全窗口并且将字号调整为6 
-------------------------------------0-*/
-
 #include <stdio.h>
-#include <windows.h>
-int len, width, left, mid, right, time;
-
-char map[80][1000];
-
-int next[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; //上0下1左2右3；
-
-int turn[2][3] = {{0, 3, 1},  //a -> b   b -> c a -> c  上右下
-                  {0, 2, 1}}; //b -> a  c -> b  c -> a	上左下
-void gotoxy(int x, int y)
+#include <stdlib.h>
+//汉诺塔问题-----经过大量的重复操作
+//可以总结出一下的最优解规律
+//第一步：把n-1个盘子从a借助c移动到b  move(n-1，a,c,b)
+//第二步:把剩下的盘子从a移到c    print一波
+//第三步：把n-1个盘子从b借助c移动到a   move(n-1,b,c,a)
+//...变成n-2了  又开启了一段轮回，进行递归调用
+void move(int n,int a,int b,int c)
 {
-    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD pos;
-    pos.X = x;
-    pos.Y = y;
-    SetConsoleCursorPosition(handle, pos);
-}
-
-int init()
-{
-    system("color 30");
-    printf("请输入你要递归的\n汉诺塔数目_");
-    int n;
-    scanf("%d", &n);
-    time = 50 / n;
-    left = 1, mid = 2 * (n + 1), right = mid + 2 * n + 1;
-    len = 3 * (2 * n + 1);
-    width = n + 1;
-    for (int i = 0; i <= width; i++)
+    static int cnt=1;
+    if(n==1)
     {
-        for (int j = 0, num = i; j <= len; j++)
-        {
-            if (i == 0 || j == 0 || i == width || j == len)
-                map[i][j] = '#';
-            if ((i > 1 && i < width) && (j == mid - 1 || j == right - 1))
-                map[i][j] = '|';
-            if (num && (i >= 1 && i <= width - 1) && j % 2 != 0 && j < mid)
-            {
-                map[i][j] = -95;
-                map[i][j + 1] = -10; //打印 ■  ■占2个字节可以拆开来
-                num--;
-            }
-        }
+        printf("Step:%d:%c->%c\n",cnt++,a,c);
     }
-    gotoxy(0, 0); //容易出现东西卡顿
-    for (int i = 0; i <= width; i++)
+    else
     {
-        for (int j = 0; j <= len; j++)
-            printf("%c", map[i][j]);
-        printf("\n");
-    }
-    return n;
-}
-
-void play(int x, int y)
-{
-    int turn_0, n = 0, i, j, k, tx, ty, flag = 0;
-    if ((x == mid && y == right) || (x == left && y == mid) || (x == left && y == right))
-        turn_0 = 0; //往右
-    else if ((x == mid && y == left) || (x == right && y == left) || (x == right && y == mid))
-        turn_0 = 1; //往左
-    for (i = 1, j = y; i <= width; i++)
-    { //目的地
-        if (map[i][j] != 0)
-        {
-            tx = i - 1;
-            ty = j;
-            break;
-        }
-    }
-    for (i = 1, j = x; i <= width; i++)
-    { //出发点
-        if (map[i][j] != 0)
-        {
-            break;
-        }
-    }
-    while (1)
-    {
-        while ((i != 1 || j != x) && (i != 1 || j != y) && (i != tx || j != ty))
-        {
-            if (turn_0 == 0)
-                for (k = mid - 3; k >= 0; k--)
-                {
-                    map[i + next[turn[turn_0][n]][0]][j + next[turn[turn_0][n]][1] + k] = map[i][j + k];
-                    map[i][j + k] = 0;
-                }
-            else
-                for (k = 0; k < mid - 2; k++)
-                {
-                    map[i + next[turn[turn_0][n]][0]][j + next[turn[turn_0][n]][1] + k] = map[i][j + k];
-                    map[i][j + k] = 0;
-                }
-            gotoxy(j, i);
-            Sleep(time);
-            for (k = 0; k < mid - 2; k++)
-            {
-                printf(" ");
-            }
-            i = i + next[turn[turn_0][n]][0];
-            j = j + next[turn[turn_0][n]][1];
-            gotoxy(j, i);
-            Sleep(time);
-            for (k = 0; k < mid - 2; k++)
-            {
-                printf("%c", map[i][j + k]);
-            }
-        }
-        n++; //改变方向;
-        if (i == tx && j == ty)
-            return;
-        if (turn_0 == 0)
-            for (k = mid - 3; k >= 0; k--)
-            {
-                map[i + next[turn[turn_0][n]][0]][j + next[turn[turn_0][n]][1] + k] = map[i][j + k];
-                map[i][j + k] = 0;
-            }
-        else
-            for (k = 0; k < mid - 2; k++)
-            {
-                map[i + next[turn[turn_0][n]][0]][j + next[turn[turn_0][n]][1] + k] = map[i][j + k];
-                map[i][j + k] = 0;
-            }
-        gotoxy(j, i);
-        for (k = 0; k < mid - 2; k++)
-        {
-            printf(" ");
-        }
-        Sleep(time);
-        i = i + next[turn[turn_0][n]][0];
-        j = j + next[turn[turn_0][n]][1];
-        gotoxy(j, i);
-        for (k = 0; k < mid - 2; k++)
-            printf("%c", map[i][j + k]);
-        Sleep(time);
+        move(n-1,a,c,b);
+        printf("S4tep:%d:%c->%c\n",cnt++,a,c);
+        move(n-1,b,c,a);
     }
 }
-
-void move(int a, int b, int c, char aa, char bb, char cc, int n)
-{
-    if (n == 1)
-    {
-        gotoxy(0, width + 1);
-        printf("from %c to %c", aa, cc);
-        play(a, c);
-        return;
-    }
-    move(a, c, b, aa, cc, bb, n - 1);
-    gotoxy(0, width + 1);
-    printf("from %c to %c", aa, cc);
-    play(a, c);
-    move(b, a, c, bb, aa, cc, n - 1);
-    gotoxy(0, width + 1);
-}
-
 int main()
 {
-    int n = init();
-    move(left, mid, right, 'a', 'b', 'c', n);
+    int n,a='A',b='B',c='C';
+    printf("\n---------TOWERS OF HANOI!!!\n");
+    printf("The problem starts with n disks on Tower A.\nInput n:\n");
+    if(scanf("%d",&n)!=1||n<1)
+    {
+        printf("\nERROR:Postive integer not found\n");
+        return -1;
+    }
+    move(n,a,b,c);
     return 0;
 }
