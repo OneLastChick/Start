@@ -3,6 +3,7 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "2.C": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "CE5_5.C": "cpp"
     }
 }
