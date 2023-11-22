@@ -1,104 +1,59 @@
-// #include <stdio.h>
-// int queen[11];
-// int column[11];
-// int slash1[20];  //记录45度的冲突
-// int slash2[20];  //记录135度的冲突
-// int count=0;
-// int n=0;//定义棋盘的大小
-// void output()
-// {
-//     printf("\nWay %2d:",count);
-//     for(int i=0;i<n;i++)
-//     {
-//         printf("%2d",queen[i]);
-//     }
-// }
-// void putQueen(int row)
-// {
-//     int col;
-//     if(row==n)     //8个皇后全部放满
-//     {
-//         count ++;
-//         output();
-//         return;
-//     }
-//     for(col=0;col<n;col++)
-//     {
-//         if(column[col]&&slash1[row+col]&&slash2[row-col+n-1])//逐一尝试将当前行皇后放置在不同列上
-//         {
-//             queen[row]=col;     //在当前列放置皇后
-//             column[col]=slash1[row+col]=slash2[row-col+n-1]=0;//设置冲突范围
-//             putQueen(row+1);  //递归在下一行放置皇后
-//             column[col]=slash1[row+col]=slash2[row-col+n-1]=1;//撤销冲突范围
-//         }
-//     }
-// }
-// int main()
-// {
-//     scanf("%d",&n);
-//     for(int i=0;i<n;i++)
-//     {
-//         column[i]=1;
-//     }
-//     for(int i=0;i<(2*n-1);i++)
-//     {
-//         slash1[i]=slash2[i]=1;
-//     }
-//     putQueen(0);   //从第0行开始摆放
-//     return 0;
-// }
 #include <stdio.h>
-
-int queen[11];       // 用于记录每行皇后所在的列号
-int column[11];      // 用于标记每列是否已有皇后，1表示可用，0表示已被占用
-int slash1[20];      // 用于记录45度对角线上的冲突情况
-int slash2[20];      // 用于记录135度对角线上的冲突情况
-int count = 0;       // 用于计数满足条件的解的数量
-int n = 0;           // 棋盘的大小，即皇后的数量
-
-void output()
+#include <math.h>
+int iszimishu(unsigned long long i,int k)
 {
-    printf("\nWay %2d:", count);
-    for (int i = 0; i < n; i++)
+    int sum=0;
+    unsigned long long n=i;
+    while(i>0)
     {
-        printf("%2d", queen[i]);
+        int c=i%10;
+        i/=10;
+        sum+=pow(c,k);
     }
-}
-
-void putQueen(int row)
-{
-    int col;
-    if (row == n)  // 所有皇后都已放置完成
+    if(sum==n)
     {
-        count++;
-        output();
-        return;
+        return 1;
     }
-    for (col = 0; col < n; col++)
-    {
-        // 检查当前位置是否可以放置皇后，满足条件的话就放置皇后并递归下一行
-        if (column[col] && slash1[row + col] && slash2[row - col + n - 1])
-        {
-            queen[row] = col;  // 在当前列放置皇后
-            column[col] = slash1[row + col] = slash2[row - col + n - 1] = 0; // 标记冲突范围
-            putQueen(row + 1);  // 递归放置下一行的皇后
-            // 恢复冲突标记，以便尝试其他位置
-            column[col] = slash1[row + col] = slash2[row - col + n - 1] = 1;
-        }
-    }
+    else
+        return 0;
 }
 
 int main()
 {
-    scanf("%d", &n);  // 从用户输入获取棋盘大小
-    for (int i = 0; i < n; i++)
+    int k=1;
+    
+    while(k!=0)
     {
-        column[i] = 1;  // 初始化列标记，表示所有列都可以放置皇后
+        scanf("%d",&k);
+        int count=0;
+        for(unsigned long long i=pow(10,k-1);i<pow(10,k);i++)
+        {
+            if(iszimishu(i,k))
+            {
+                count++;
+            }
+        }
+        if(k>0){ if(k==3)printf("%d位的水仙花数共有%d个",k,count);
+                  if(k==4)printf("%d位的四叶玫瑰数共有%d个",k,count);
+                  if(k==5)printf("%d位的五角星数共有%d个",k,count);
+                  if(k==6)printf("%d位的六合数共有%d个",k,count);
+                  if(k==7)printf("%d位的北斗星数共有%d个",k,count);
+                  if(k==8)printf("%d位的八仙数共有%d个",k,count);
+                
+                
+        for(unsigned long long i=pow(10,k-1);i<pow(10,k);i++)
+        {
+            if(iszimishu(i,k))
+            {
+                count--;
+                printf("%llu",i);
+                if(count>0)
+                {
+                    printf(",");
+                }
+            }
+        }
+        }
+        printf("\n");
     }
-    for (int i = 0; i < (2 * n - 1); i++)
-    {
-        slash1[i] = slash2[i] = 1;  // 初始化对角线冲突标记，表示没有冲突
-    }
-    putQueen(0);  // 从第0行开始放置皇后
-    return 0;
 }
