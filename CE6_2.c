@@ -5,9 +5,16 @@ void OutputZhuanZhiarray(int *array,int i,int j)
     {
         for(int col=0;col<i;col++)
         {
-            printf("%-2d",*(array+col*j+row));
+            printf("%d",*(array+col*j+j-1-row));
+            if(col<i-1)
+            {
+                printf(" ");
+            }
         }
-        printf("\n");
+        if(row<j-1)
+        {
+            printf("\n");
+        }
     }
 }
 int main()
@@ -23,4 +30,5 @@ int main()
         }
     }
     OutputZhuanZhiarray((int *)array,i,j);
+    return 0;
 }
