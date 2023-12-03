@@ -13,7 +13,7 @@ struct student{
     struct student* next;
 };
 
-void swapData(struct student* ptr1, struct student* ptr2);
+void swapData(struct student *head,struct student* ptr1, struct student* ptr2);
 void InsertData(struct student*head,int num)
 {
     struct student*temp=head;
@@ -115,29 +115,34 @@ void ClearData(struct student*head)
     }
     free(head);
 }
-void swapData(struct student *ptr1, struct student *ptr2) {
-    int tempID = ptr2->ID;
-    char tempName[20];
-    strcpy(tempName, ptr2->name);
-    int tempEnglish = ptr2->English;
-    int tempMath = ptr2->math;
-    int tempPhysical = ptr2->physical;
-    int tempC = ptr2->C;
-    float tempAverge = ptr2->averge;
-    ptr2->ID = ptr1->ID;
-    strcpy(ptr2->name, ptr1->name);
-    ptr2->English = ptr1->English;
-    ptr2->math = ptr1->math;
-    ptr2->physical = ptr1->physical;
-    ptr2->C = ptr1->C;
-    ptr2->averge = ptr1->averge;
-    ptr1->ID = tempID;
-    strcpy(ptr1->name, tempName);
-    ptr1->English = tempEnglish;
-    ptr1->math = tempMath;
-    ptr1->physical = tempPhysical;
-    ptr1->C = tempC;
-    ptr1->averge = tempAverge;
+void swapData(struct student* head, struct student* ptr1, struct student* ptr2) 
+{
+    struct student *prev1 = NULL, *prev2 = NULL, *temp = head;
+    // 查找ptr1和ptr2的前驱节点
+    while (temp != NULL) {
+        if (temp->next == ptr1) {
+            prev1 = temp;
+        }
+        if (temp->next == ptr2) {
+            prev2 = temp;
+        }
+        temp = temp->next;
+    } 
+    if(ptr2->next==NULL)
+    {
+        prev1->next=ptr2;
+        prev2->next=ptr1;
+        ptr2->next=ptr1->next;
+        ptr1->next=NULL;
+    }
+    else
+    {
+        prev1->next = ptr2;
+        prev2->next = ptr1;
+        struct student* tempNext = ptr1->next;
+        ptr1->next = ptr2->next;
+        ptr2->next = tempNext;
+    }
 }
 void ChoiceResort(struct student*head,int command1)
 {
@@ -187,7 +192,8 @@ void ChoiceResort(struct student*head,int command1)
         //遍历完后，让p指向第i+1个结点，为下一次循环做准备
         p=q->next;
         //调用一个自定义的函数swapData，用来交换memo和q所指向的结点的数据，实现排序
-        swapData(memo,q);
+        swapData(head,q,memo);
+        q=memo;
     }
     }
     else
@@ -220,12 +226,59 @@ void ChoiceResort(struct student*head,int command1)
         //遍历完后，让p指向第i+1个结点，为下一次循环做准备
         p=q->next;
         //调用一个自定义的函数swapData，用来交换memo和q所指向的结点的数据，实现排序
-        swapData(memo,q);
+        swapData(head,q,memo);
+        q=memo;
     }
     }
     //排序完成后，调用一个自定义的函数PrintData，用来打印链表中的所有数据
     CountAvergyGrages(head);
 }
+
+// void MaoPao(struct student*head,int command1)
+// {
+//     struct student*q=head;
+//     struct student*p=head->next;
+//     struct student*temp=head->next;
+//     int length=0;
+//     while(temp!=NULL)
+//     {
+//         length++;
+//         temp->averge = ((float) (temp->English + temp->math + temp->physical + temp->C) / 4);
+//         temp=temp->next;
+//     }
+//     if(command1==0)
+//     {
+//     for(int i=1;i<=length-1;i++)
+//     {
+//         for(int j=1;j<=length-i;j++)
+//         {
+//             if(q->averge>p->averge)
+//             {
+                
+//             }
+            
+//         }
+        
+//     }
+//     }
+//     else
+//     {
+//         for(int i=1;i<=length-1;i++)
+//     {
+//         for(int j=1;j<=length-i;j++)
+//         {
+//             if(p->averge<p->next->averge)
+//             {
+//                 swapData(head,p,p->next);
+//                 p=p->next;
+//             }
+//             p=p->next;
+//         }
+//         p=head->next;
+//     }
+//     }
+//     CountAvergyGrages(head);
+// }
 void MaoPao(struct student*head,int command1)
 {
     struct student*q=head;
@@ -250,7 +303,7 @@ void MaoPao(struct student*head,int command1)
             {
                 struct student*temp1=p;
                 struct student*temp2=p->next;
-                swapData(p,p->next);
+                swapData(head,p,p->next);
                 p=temp1;
                 p->next=temp2;
                 
@@ -270,7 +323,7 @@ void MaoPao(struct student*head,int command1)
             {
                 struct student*temp1=p;
                 struct student*temp2=p->next;
-                swapData(p,p->next);
+                swapData(head,p,p->next);
                 p=temp1;
                 p->next=temp2;;
             }
@@ -281,6 +334,7 @@ void MaoPao(struct student*head,int command1)
     }
     CountAvergyGrages(head);
 }
+
 int main()
 {
     int command=0;
@@ -312,7 +366,7 @@ int main()
             break;
         case 6:
             scanf("%d %d",&command1,&command2);///* 第一个0表示按升序排序，第二个0表示用选择法 */
-            if(command2==0)
+            if(command2==0||command2==1)
             {
                 ChoiceResort(head,command1);
             }
