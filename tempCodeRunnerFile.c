@@ -1,52 +1,34 @@
-//大数阶乘  利用数组实现高精度运算
 #include <stdio.h>
-#define MAX_NUM 1000
-void putBigNum(int *x,int n);
-int factorial(int x,int f[]);
-
-int main()
+#include <string.h>
+#include <stdlib.h>
+#define words 16
+char *p(char* ptr[],int* thenumberofeverywords)
 {
-    int n,len,result[MAX_NUM];
-    printf("请输入一个整数:");
-    scanf("%d",&n);
-    len=factorial(n,result);
-    putBigNum(result,len);
-    printf("\n");
-    return 0;
-}
-//求大数的阶乘，x是欲求阶乘的整数，f是指向保存阶乘值的数组，函数返回阶乘值的位数
-int factorial(int x,int *f)
-{
-    int i,k;
-    int width;//结果的位数
-    int carry;
-    *f=1;
-    for(i=0;i<MAX_NUM;i++)
+    char* q;
+    int max_i,maxlen=0;
+    for(int i=0;i<words;i++)
     {
-        *(f+i)=0;
-    }
-    for(width=1,i=1;i<=x;i++)      //从小到大进行阶乘运算
-    {
-        for(carry=0,k=0;k<width;k++)     //对每一位进行运算
+        int l=strlen(ptr[i]);
+        if(maxlen<l)
         {
-            *(f+k)=*(f+k)*i+carry;
-            carry=*(f+k)/10;
-            *(f+k)=*(f+k)%10;
-            if(k==width-1&&carry!=0)
-            {
-                width++;
-            }
+            maxlen=l;
+            max_i=i;
         }
     }
-    return width;
-}
+    q=ptr[max_i];
+    *thenumberofeverywords=strlen(ptr[max_i]);
+    return q;
 
-//输出一个x指向的n位大数
-void putBigNum(int *x,int n)
+}
+int main()
 {
-    int *p;
-    for(p=x+n-1;p>=x;p--)
-    {
-        printf("%d",*p);
+    char *ptr[100];
+    int number=0;
+    int *m=&number;
+    for(int i=0;i<words;i++){
+        ptr[i]=(char*)malloc(sizeof(char)*100);
+        scanf("%s",ptr[i]);
     }
+    printf("%s",p(ptr,m));
+    printf(" %d",*m);
 }
