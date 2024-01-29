@@ -49,8 +49,8 @@ cmake_ninja_workdir = C$:/Users/Emo/Desktop/WorkSpace/cmake-build-debug/
 
 build cmake_object_order_depends_target_WorkSpace: phony || CMakeFiles/WorkSpace.dir
 
-build CMakeFiles/WorkSpace.dir/CE7_4.c.obj: C_COMPILER__WorkSpace_unscanned_Debug C$:/Users/Emo/Desktop/WorkSpace/CE7_4.c || cmake_object_order_depends_target_WorkSpace
-  DEP_FILE = CMakeFiles\WorkSpace.dir\CE7_4.c.obj.d
+build CMakeFiles/WorkSpace.dir/test14.c.obj: C_COMPILER__WorkSpace_unscanned_Debug C$:/Users/Emo/Desktop/WorkSpace/test14.c || cmake_object_order_depends_target_WorkSpace
+  DEP_FILE = CMakeFiles\WorkSpace.dir\test14.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\WorkSpace.dir
   OBJECT_FILE_DIR = CMakeFiles\WorkSpace.dir
@@ -63,7 +63,7 @@ build CMakeFiles/WorkSpace.dir/CE7_4.c.obj: C_COMPILER__WorkSpace_unscanned_Debu
 #############################################
 # Link the executable WorkSpace.exe
 
-build WorkSpace.exe: C_EXECUTABLE_LINKER__WorkSpace_Debug CMakeFiles/WorkSpace.dir/CE7_4.c.obj
+build WorkSpace.exe: C_EXECUTABLE_LINKER__WorkSpace_Debug CMakeFiles/WorkSpace.dir/test14.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\WorkSpace.dir

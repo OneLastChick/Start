@@ -4,6 +4,9 @@
         "*.embeddedhtml": "html",
         "2.C": "cpp",
         "stdio.h": "c",
-        "CE5_5.C": "cpp"
-    }
+        "CE5_5.C": "cpp",
+        "omp.h": "c"
+    },
+    "cmake.configureOnOpen": true,
+    "python.REPL.enableREPLSmartSend": false
 }
