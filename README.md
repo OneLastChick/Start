@@ -1,4 +1,4 @@
-# 学习各种语言的一些联系
+# 学习各种语言的一些练习
 - cStudy-C语言学习
 hustCSE-VMcourse-C语言程序设计OJ
 - pythonStudy-python学习
