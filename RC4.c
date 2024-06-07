@@ -47,8 +47,8 @@ void rc4_crypt(unsigned char *s,unsigned char *Data,unsigned long Len)
 int main()
 {
     unsigned char s[256]={0},s2[256]={0};
-    char key[256]={"HelloWorld"};
-    char pData[512]="HelloWorld";
+    char key[256]={"XYCTF"};
+    char pData[512]="5a3c46e0228b444decc7651c8a7ca93ba4cb35a46f7eb589bef4";
     unsigned long len=strlen(pData);
     int i;
 
@@ -72,7 +72,7 @@ int main()
         s2[i]=s[i];
     }
     printf("已经初始化，现在加密:\n\n");
-    rc4_crypt(s,(unsigned char*)pData,len);
+    //rc4_crypt(s,(unsigned char*)pData,len);
     printf("pData=%s\n\n",pData);
     printf("已经加密，现在解密:\n\n");
     rc4_crypt(s2,(unsigned char*)pData,len);
